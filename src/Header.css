@@ -1,6 +1,7 @@
 @import '~antd/dist/antd.css';
 
 .Header {
+	margin: 40px;
   text-align: center;
 }
 
