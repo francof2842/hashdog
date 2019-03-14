@@ -4,19 +4,9 @@ import { Link } from 'react-router-dom';
 import { AuthConsumer } from './AuthContext';
 import './Header.css';
 
-const headerStyle = {
-  display: 'flex',
-  backgroundColor: '#26c6da',
-  justifyContent: 'space-between',
-  padding: 10
-}
-
-const linkStyle = {
-  color: 'white',
-  textDecoration: 'underline'
-}
 
 export default () => (
+  <div>
   <header>
     <AuthConsumer>
       {({ isAuth, login, logout }) => (
@@ -31,7 +21,7 @@ export default () => (
           {isAuth ? (
             <ul>
               <Link to="/dashboard">
-              Dashboard
+              Lista de Usuarios
 
               </Link>
               <Button type="primary" onClick={logout}>
@@ -44,10 +34,11 @@ export default () => (
             login
 
             </Button>
-            
+
           )}
         </div>
       )}
     </AuthConsumer>
   </header>
+  </div>
 );

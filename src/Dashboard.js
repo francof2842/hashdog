@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
     pagination: {},
     loading: false,
     searchText: '',
-    list: false,
+    list: true,
   };
 
   getColumnSearchProps = (dataIndex) => ({
@@ -45,7 +45,6 @@ class Dashboard extends React.Component {
         >
           Reset
         </Button>
-        this.state.list = true;
       </div>
     ),
     filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />,
@@ -81,6 +80,8 @@ class Dashboard extends React.Component {
   }
 
   handleTableChange = (pagination, filters, sorter) => {
+    
+  	if (!this.state.list){
     const pager = { ...this.state.pagination };
     pager.current = pagination.current;
     this.setState({
@@ -92,7 +93,8 @@ class Dashboard extends React.Component {
       sortField: sorter.field,
       sortOrder: sorter.order,
       ...filters,
-    });
+    })
+	}
   }
 
   fetch = (params = {}) => {
@@ -119,6 +121,8 @@ class Dashboard extends React.Component {
     });
   }
 
+
+
   render() {
     	const columns = [{
 		  title: 'Name',
@@ -140,10 +144,10 @@ class Dashboard extends React.Component {
 		  dataIndex: 'email',
 		  ...this.getColumnSearchProps('email'),
 		}];
-		if (!this.state.list){
+
 		    return (
 		    	<div>
-		    		<h1>${this.state.list}</h1>
+
 					<Table
 					columns={columns}
 					rowKey={record => record.login.uuid}
@@ -154,10 +158,7 @@ class Dashboard extends React.Component {
 					/> 
 			    </div> 	
 		    );
-		    this.state.list = true;
-		}else{
-			return (<h1>Nada</h1>);
-		}
+
   }
 }
 
